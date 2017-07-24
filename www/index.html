@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        
+        
+        <!-- Google Fonts -->
+        <link href="themes/css/google.fonts.css" rel="stylesheet" type="text/css">
+        <link href="themes/css/google.fonts2.css" rel="stylesheet" type="text/css">
+
+        <!-- Bootstrap Core Css -->
+        <link href="themes/css/bootstrap.css" rel="stylesheet">
+        <link href="themes/css/material-icons.css" rel="stylesheet">
+
+        <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css">
+
+        <!-- Waves Effect Css -->
+        <link href="themes/css/waves.css" rel="stylesheet" />
+
+        <!-- Animation Css -->
+        <link href="themes/css/animate.css" rel="stylesheet" />
+
+        <!-- Morris Chart Css-->
+        <link href="themes/css/morris.css" rel="stylesheet" />
+
+        <!-- Sweetalert Css-->
+        <link href="themes/css/sweetalert.css" rel="stylesheet" />
+
+        <!-- Custom Css -->
+        <link href="themes/css/style.css" rel="stylesheet">
+
+        <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+        <link href="themes/css/all-themes.css" rel="stylesheet" />
+        <title>Lelang BPD DIY</title>
+    </head>
+    <body>
+    <!-- ________________ PAGE HOME ________________ -->
+    <div data-role="page" id="pagehome">
+        <div class="theme-indigo">
+        <!-- Page Loader -->
+        <div class="page-loader-wrapper">
+            <div class="loader">
+                <div class="preloader">
+                    <div class="spinner-layer pl-red">
+                        <div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+                </div>
+                <p>Please wait...</p>
+            </div>
+        </div>
+        <!-- #Page Loader -->
+        <!-- Top Bar -->
+        <nav class="navbar">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a href="javascript:void(0);" class="bars"></a>
+                    <div class="navbar-brand text-center">
+                    <a href="#"><img src="img/logo-lelang.png" style="max-height: 100%; width: 70%;height: 90%;padding-top: 1%;"></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!-- #Top Bar -->  
+        <!-- Left Sidebar -->
+        <section>
+            <!-- Left Sidebar -->
+            <aside id="leftsidebar" class="sidebar">
+                <!-- User Info -->
+                <div class="user-info">
+                    <div class="image">
+                        <img src="themes/img/user.png" width="48" height="48" alt="User" />
+                    </div>
+                    <div class="info-container">
+                        <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">John Doe</div>
+                        <div class="email">john.doe@example.com</div>
+                        <div class="btn-group user-helper-dropdown">
+                            <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">&#xe313;</i>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="#" class="menu-profil"><i class="material-icons">person</i>Profil</a></li>
+                                <li role="seperator" class="divider"></li>
+                                <li><a href="#" class="menu-trans"><i class="material-icons">&#xe915;</i>Transaksi</a></li>
+                                <li role="seperator" class="divider"></li>
+                                <li><a href="#" class="menu-logout"><i class="material-icons">input</i>Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- #User Info -->
+                <!-- Menu -->
+                <div class="menu">
+                    <ul class="list">
+                        <li class="header">MAIN NAVIGATION</li>
+                        <li class="active">
+                            <a href="index.html" class="menu-home">
+                                <i class="material-icons">home</i>
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="menu-barang">
+                                <i class="material-icons">&#xe531;</i>
+                                <span>Barang Lelang</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="menu-jadwal">
+                                <i class="material-icons">today</i>
+                                <span>Jadwal Lelang</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="menu-syarat">
+                                <i class="material-icons">&#xe85e;</i>
+                                <span>Syarat dan Ketentuan</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="menu-login">
+                                <i class="material-icons">&#xe899;</i>
+                                <span>Login</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="menu-about">
+                                <i class="material-icons">&#xe0cf;</i>
+                                <span>Tentang Kami</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- #Menu -->
+                <!-- Footer -->
+                <div class="legal">
+                    <div class="copyright">
+                        &copy; 2017 <a href="javascript:void(0);"> Kelompok 2 OJT</a>.
+                    </div>
+                </div>
+                <!-- #Footer -->
+            </aside>
+            <!-- #END# Left Sidebar -->
+        </section>
+        <!-- Slider -->
+        <section class="slider-custom">
+                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#carousel-example-generic" data-slide-to="0" class=""></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="2" class="active"></li>
+                    </ol>
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item">
+                            <img src="themes/img/image-gallery/13.jpg">
+                        </div>
+                        <div class="item active left">
+                            <img src="themes/img/image-gallery/18.jpg">
+                        </div>
+                        <div class="item next left">
+                            <img src="themes/img/image-gallery/19.jpg">
+                        </div>
+                    </div>
+
+                    <!-- Controls -->
+                    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+        </section>
+        <!-- #Slider -->
+        <!-- #Left Sidebar -->
+        <section class="content" >
+            <br>
+            <div class="container-fluid">
+                <div class="block-header text-center">
+                    <h4>Selamat datang di Aplikasi Lelang<br>PT. Bank BPD DIY</h4>
+                </div>
+            
+                <!-- Widgets -->
+                <div class="row clearfix">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div class="info-box bg-pink hover-expand-effect">
+                            <div class="icon">
+                                <i class="material-icons">assignment</i>
+                            </div>
+                            <div class="content">
+                                <div class="text">INVENTARIS</div>
+                                <div class="number count-to" data-from="0" data-to="125" data-speed="15" data-fresh-interval="20"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div class="info-box bg-cyan hover-expand-effect">
+                            <div class="icon">
+                                <i class="material-icons">gavel</i>
+                            </div>
+                            <div class="content">
+                                <div class="text">PENAWARAN</div>
+                                <div class="number count-to" data-from="0" data-to="257" data-speed="1000" data-fresh-interval="20"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div class="info-box bg-light-green hover-expand-effect">
+                            <div class="icon">
+                                <i class="material-icons">&#xe915;</i>
+                            </div>
+                            <div class="content">
+                                <div class="text">TRANSAKSI</div>
+                                <div class="number count-to" data-from="0" data-to="243" data-speed="1000" data-fresh-interval="20"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div class="info-box bg-orange hover-expand-effect">
+                            <div class="icon">
+                                <i class="material-icons">people</i>
+                            </div>
+                            <div class="content">
+                                <div class="text">PESERTA</div>
+                                <div class="number count-to" data-from="0" data-to="1225" data-speed="1000" data-fresh-interval="20"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <a href="#pagebarang">
+                        <div class="info-box bg-red hover-expand-effect text-center">
+                            <div class="icon">
+                                <i class="material-icons">pageview</i>
+                            </div>
+                            
+                            <div class="content">
+                                <div class="text"><h3>LIHAT BARANG</h3></div>
+                            </div>
+                            
+                        </div>
+                        </a>
+                    </div>
+                </div>
+                <!-- #END# Widgets -->
+            </div>
+        </section>
+        </div>
+    </div>
+    <!-- ________________ #PAGE HOME ________________ -->
+
+    <!-- ________________ LOGIN ________________ -->
+    <div data-role="page" id="pagelogin">
+        <div class="login-page">
+            <div class="login-box">
+            <div class="logo">
+                <a href="#"><img src="img/logo-lelang.png" style="max-height: 100%; width: 70%;height: 90%;padding-top: 1%;"></a>
+            </div>
+            <div class="card">
+                <div class="body">
+                        <div class="msg">Masukkan NIK dan Unique Key</div>
+                        <div class="input-group" data-role="none">
+                            <span class="input-group-addon">
+                                <i class="material-icons">person</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="text" class="form-control" id="inplognik" placeholder="NIK" required autofocus>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="material-icons">lock</i>
+                            </span>
+                            <div class="form-line">
+                                <input type="text" class="form-control" id="inploguniq" placeholder="Unique Key" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <button class="btn btn-block btn-lg bg-pink waves-effect" id="btnlogin"><i class="material-icons">input</i> LOGIN</button>
+                            </div>
+                            <div class="col-xs-6">
+                                <button class="btn btn-block btn-lg bg-green waves-effect"><i class="material-icons">&#xe325;</i> SCAN</button>
+                            </div>
+                        </div>
+                        <div class="row m-t-15 m-b--20">
+                            <div class="col-xs-6">
+                                
+                            </div>
+                            <div class="col-xs-6 align-right">
+                                <a href="#">Lupa Unique Key?</a>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+        </div>    
+    </div>
+    <!-- ________________ #LOGIN ________________ -->
+
+    <!-- ________________ PAGE BARANG ________________ -->
+    <div data-role="page" id="pagebarang">
+        <div class="theme-indigo">
+        <!-- Page Loader -->
+        <div class="page-loader-wrapper">
+            <div class="loader">
+                <div class="preloader">
+                    <div class="spinner-layer pl-red">
+                        <div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+                </div>
+                <p>Please wait...</p>
+            </div>
+        </div>
+        <!-- #Page Loader -->
+        <!-- Top Bar -->
+        <nav class="navbar">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a href="index.html" class=""><i class="material-icons-custom">&#xe5c4;</i></a>
+                    <div class="navbar-brand text-center">
+                    <a href="#"><img src="img/logo-lelang.png" style="max-height: 100%; width: 70%;height: 90%;padding-top: 1%;"></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!-- #Top Bar -->
+        
+        <section class="content" >
+            <br><br><br><br><br>
+            <div class="container-fluid">
+                <div class="block-header">
+                    <h2>DAFTAR BARANG LELANG</h2>
+                </div>
+                <div id="konten-brg">
+                </div>
+                <!-- Small Size -->
+                    <div class="modal fade" id="smallModal2" tabindex="-1" role="dialog">
+                        <div class="modal-dialog modal-sm" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="smallModalLabel2">Ini Judul</h4>
+                                </div>
+                                <div class="modal-body text-center">
+                                    <h3>Sisa Waktu</h3>
+                                    <div id="clock2"></div>
+                                    <!-- <span class="label-waktu label-danger">01:06:43:20</span> -->
+                                </div><br>
+                                <div class="col-xs-12">
+                                    <div class="form-group form-float form-group-lg">
+                                        <div class="form-line">
+                                            <input class="form-control text-center inpbid" type="text">
+                                            <label class="form-label">Jumlah Penawaran ex : 1000000</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <button type="button" class="btn btn-block btn-lg bg-green waves-effect"><i class="material-icons">done</i> OK</button>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <button type="button" class="btn btn-block btn-lg bg-deep-orange waves-effect" data-dismiss="modal"><i class="material-icons">clear</i> Batal</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </section>
+        </div>
+    </div>
+    <!-- ________________ #PAGE BARANG ________________ -->
+
+    <!-- ________________ PAGE DETAIL BARANG ________________ -->
+    <div data-role="page" id="pagedetailbrg">
+        <div class="theme-indigo">
+        <!-- Top Bar -->
+        <nav class="navbar">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a href="#pagebarang" class=""><i class="material-icons-custom">&#xe5c4;</i></a>
+                    <div class="navbar-brand text-center">
+                    <a href="#"><img src="img/logo-lelang.png" style="max-height: 100%; width: 70%;height: 90%;padding-top: 1%;"></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!-- #Top Bar -->
+        <section class="content" >
+            <br><br><br><br><br>
+            <div class="container-fluid">
+                <!-- __________ DETAIL BARANG __________ -->
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="header-detailbrg">
+                            <!-- Slider -->
+                            <section class="slider-detail-brg">
+                                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                    <!-- Indicators -->
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#carousel-example-generic" data-slide-to="0" class=""></li>
+                                        <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
+                                        <li data-target="#carousel-example-generic" data-slide-to="2" class="active"></li>
+                                    </ol>
+
+                                    <!-- Wrapper for slides -->
+                                    <div class="carousel-inner" role="listbox">
+                                        <div class="item active">
+                                            <img src="" id="imgdetail1">
+                                        </div>
+                                        <!-- <div class="item active left">
+                                            <img src="" id="imgdetail2">
+                                        </div>
+                                        <div class="item next left">
+                                            <img src="" id="imgdetail3">
+                                        </div> -->
+                                    </div>
+
+                                    <!-- Controls -->
+                                    <!-- <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a> -->
+                                </div>
+                            </section>
+                            <!-- #Slider -->
+                        </div>
+                        <div class="body-custom">
+                            <div>
+                                <table class="table table-striped">
+                                    <tbody>
+                                        <tr><td><strong>Nama Barang</strong></td></tr>
+                                        <tr><td id="tdnama"></td></tr>
+                                        <tr><td><strong>Tanggal Mulai</strong></td></tr>
+                                        <tr><td id="tdtglmulai"><!-- 20-05-2017 --></td></tr>
+                                        <tr><td><strong>Tanggal Selesai</strong></td></tr>
+                                        <tr><td id="tdtglselesai"><!-- 20-05-2017 --></td></tr>
+                                        <tr><td><strong>Kategori</strong></td></tr>
+                                        <tr><td id="tdkategori"><!-- Mobil --></td></tr>
+                                        <tr><td><strong>Harga Minimal</strong></td></tr>
+                                        <tr><td id="tdhrgmin">Rp. <!-- Rp. 80.000.000 ,- --></td></tr>
+                                        <tr><td><strong>Deskripsi</strong></td></tr>
+                                        <tr><td id="tddeskripsi"><!-- 
+                                            - Tahun Pembuatan : 2016 <br>
+                                            - Warna : Abu-abu <br>
+                                            - TNKB : AB 1234 YK -->
+                                        </td></tr>                                    
+                                    </tbody>
+                                </table>
+                            <!-- <div class="row clearfix js-sweetalert">
+                                <div class="col-xs-12">
+                                    <button type="button" class="btn btn-block btn-lg bg-red waves-effect" data-type="html-message"><i class="material-icons">gavel</i> Ikut Lelang</button>
+                                </div>  -->
+                            </div>
+                            <button type="button" class="btn btn-block bt-lg bg-red waves-effect" data-toggle="modal" data-target="#smallModal"><i class="material-icons">gavel</i> Ikut Lelang</button>
+                            </div>
+
+                            <!-- Small Size -->
+                            <div class="modal fade" id="smallModal" tabindex="-1" role="dialog">
+                                <div class="modal-dialog modal-sm" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="smallModalLabel">Toyota Kijang Innova</h4>
+                                        </div>
+                                        <div class="modal-body text-center">
+                                            <h3>Sisa Waktu</h3>
+                                            <div id="clock"></div>
+                                            <!-- <span class="label-waktu label-danger">01:06:43:20</span> -->
+                                        </div><br>
+                                        <div class="col-xs-12">
+                                            <div class="form-group form-float form-group-lg">
+                                                <div class="form-line">
+                                                    <input class="form-control text-center inpbid" type="text">
+                                                    <label class="form-label">Jumlah Penawaran ex : 1000000</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <div class="row">
+                                                <div class="col-xs-6">
+                                                    <button type="button" class="btn btn-block btn-lg bg-green waves-effect"><i class="material-icons">done</i> OK</button>
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <button type="button" class="btn btn-block btn-lg bg-deep-orange waves-effect" data-dismiss="modal"><i class="material-icons">clear</i> Batal</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- __________ #DETAIL BARANG __________ -->
+            </div>
+        </section>
+        </div>
+    </div>
+    <!-- ________________ #PAGE DETAIL BARANG ________________ -->
+
+    <!-- ________________ PAGE PROFIL ________________ -->
+    <div data-role="page" id="pageprofil">
+        <div class="theme-indigo">
+        <!-- Top Bar -->
+        <nav class="navbar">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a href="index.html" class=""><i class="material-icons-custom">&#xe5c4;</i></a>
+                    <div class="navbar-brand text-center">
+                    <a href="#"><img src="img/logo-lelang.png" style="max-height: 100%; width: 70%;height: 90%;padding-top: 1%;"></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!-- #Top Bar -->
+        <section class="content" >
+            <br><br><br><br><br>
+            <div class="container-fluid">
+                <!-- __________ DETAIL BARANG __________ -->
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2 class="text-center">Masukkan Unique Key</h2>
+                            <div class="col-xs-9">
+                                <div class="form-group form-float form-group-lg">
+                                    <div class="form-line">
+                                        <input id="inpunique" class="form-control" type="text">
+                                        <label class="form-label">Unique Key</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-3">
+                                <button class="btn btn-block btn-lg bg-blue waves-effect ui-btn ui-shadow ui-corner-all"><i class="material-icons">search</i></button>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <button id="btnpgprofilok" type="button" class="btn btn-block btn-lg bg-green waves-effect"><i class="material-icons">done</i> OK</button>
+                                </div>
+                                <div class="col-xs-6">
+                                    <button type="button" class="btn btn-block btn-lg bg-deep-orange waves-effect" data-dismiss="modal"><i class="material-icons">clear</i> Batal</button>
+                                </div>
+                            </div>
+
+                            
+                        </div>
+                        <div class="body">
+                            <div>
+                                <h3>Detail Peserta</h3>
+                                <table class="table table-striped">
+                                    <tbody>
+                                        <tr><td><strong>Nama Peserta</strong></td></tr>
+                                        <tr><td id="detnama"><!-- Qoirudin Christanto --></td></tr>
+                                        <tr><td><strong>NIK</strong></td></tr>
+                                        <tr><td id="detnik"><!-- 3521111998700001 --></td></tr>
+                                        <tr><td><strong>No. Rekening</strong></td></tr>
+                                        <tr><td id="detnorek"><!-- 00199827388 --></td></tr>
+                                        <tr><td><strong>Alamat</strong></td></tr>
+                                        <tr><td id="detalamat"><!-- Ngawi - Jawa Timur --></td></tr>
+                                        <tr><td><strong>No. Telepon</strong></td></tr>
+                                        <tr><td id="detnohp"><!-- 081234567234 --></td></tr>
+                                        <tr><td><strong>Jaminan Awal</strong></td></tr>
+                                        <tr><td id="detjaminan"><!-- Rp. 5.000.000,-  --></td></tr>                                    
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- __________ #DETAIL BARANG __________ -->
+            </div>
+        </section>
+        </div>
+    </div>
+    <!-- ________________ #PAGE PROFIL ________________ -->
+
+    <!-- ________________ PAGE JADWAL ________________ -->
+    <div data-role="page" id="pagejadwal">
+        <div class="theme-indigo">
+        <!-- Top Bar -->
+        <nav class="navbar">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a href="index.html" class=""><i class="material-icons-custom">&#xe5c4;</i></a>
+                    <div class="navbar-brand text-center">
+                    <a href="#"><img src="img/logo-lelang.png" style="max-height: 100%; width: 70%;height: 90%;padding-top: 1%;"></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!-- #Top Bar -->
+        <section class="content" >
+            <br><br><br><br><br>
+            <div class="container-fluid">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="header">
+                           <h2>Jadwal Lelang</h2>
+                        </div>
+                        <div class="body-custom">
+                            <table class="table table-striped">
+                                <tbody  id="konten-jadwal">
+                                    <!-- <tr><td><strong>TOYOTA Kijang Innova 2016</strong></td></tr><tr><td>2017-04-18</td></tr>
+                                    <tr><td><strong>HONDA Vario 110 2016</strong></td></tr>
+                                    <tr><td>2017-04-25</td></tr> -->                       
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        </div>
+    </div>
+    <!-- ________________ #PAGE JADWAL ________________ -->
+
+    <!-- ________________ PAGE SYARAT ________________ -->
+    <div data-role="page" id="pagesyarat">
+        <div class="theme-indigo">
+        <!-- Top Bar -->
+        <nav class="navbar">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a href="index.html" class=""><i class="material-icons-custom">&#xe5c4;</i></a>
+                    <div class="navbar-brand text-center">
+                    <a href="#"><img src="img/logo-lelang.png" style="max-height: 100%; width: 70%;height: 90%;padding-top: 1%;"></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!-- #Top Bar -->
+        <section class="content" >
+            <br><br><br><br><br>
+            <div class="container-fluid">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="header">
+                           <h2>Syarat dan Ketentuan</h2>
+                        </div>
+                        <div class="body">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        </div>
+    </div>
+    <!-- ________________ #PAGE SYARAT ________________ -->
+
+    <!-- ________________ PAGE ABOUT ________________ -->
+    <div data-role="page" id="pageabout">
+        <div class="theme-indigo">
+        <!-- Top Bar -->
+        <nav class="navbar">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a href="index.html" class=""><i class="material-icons-custom">&#xe5c4;</i></a>
+                    <div class="navbar-brand text-center">
+                    <a href="#"><img src="img/logo-lelang.png" style="max-height: 100%; width: 70%;height: 90%;padding-top: 1%;"></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!-- #Top Bar -->
+        <section class="content" >
+            <br><br><br><br><br>
+            <div class="container-fluid">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="header">
+                           <h2>Tentang Kami</h2>
+                        </div>
+                        <div class="body">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        </div>
+    </div>
+    <!-- ________________ #PAGE ABOUT ________________ -->
+    
+    <!-- JAVASCRIPTS -->
+    <section>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script>
+            $(document).bind('mobileinit',function(){
+                $.mobile.keepNative = "select,input,label";
+            });
+
+            $('.inpbid').keyup(function(event){
+                // skip untuk arrow key
+                if(event.which >= 37 && event.which <= 40) return;
+
+                // format nomor
+                $(this).val(function(index, value){
+                    return value
+                    .replace(/\D/g, "")
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+                });
+            });
+
+            // Tambahan Agar menu close setelah di klik
+            $('.sidebar a').click(function(){
+                $('body').removeClass('overlay-open');
+            });
+        </script>
+        <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
+        
+
+        <!-- ________________ THEME ________________ -->
+        <!-- Bootstrap Core Js -->
+        <script src="themes/js/bootstrap.js"></script>
+
+        <!-- Select Plugin Js -->
+        <script src="themes/js/bootstrap-select.js"></script>
+
+        <!-- Slimscroll Plugin Js -->
+        <script src="themes/js/jquery.slimscroll.js"></script>
+
+        <!-- Bootstrap Notify Plugin Js -->
+        <script src="themes/js/bootstrap-notify.js"></script>
+
+        <!-- Waves Effect Plugin Js -->
+        <script src="themes/js/waves.js"></script>
+
+        <!-- Sweetalert -->
+        <script src="themes/js/sweetalert.min.js"></script>
+
+        <!-- Jquery CountTo Plugin Js -->
+        <script src="themes/js/jquery.countTo.js"></script>
+        <!-- Jquery Countdown -->
+        <script src="themes/js/jquery.countdown.min.js"></script>
+
+        <!-- Morris Plugin Js -->
+        <!-- <script src="themes/js/raphael.min.js"></script>
+        <script src="themes/js/morris.js"></script> -->
+
+        <!-- ChartJs -->
+        <script src="themes/js/Chart.bundle.js"></script>
+
+        <!-- Flot Charts Plugin Js -->
+        <script src="themes/js/jquery.flot.js"></script>
+        <script src="themes/js/jquery.flot.resize.js"></script>
+        <script src="themes/js/jquery.flot.pie.js"></script>
+        <script src="themes/js/jquery.flot.categories.js"></script>
+        <script src="themes/js/jquery.flot.time.js"></script>
+
+        <!-- Sparkline Chart Plugin Js -->
+        <script src="themes/js/jquery.sparkline.js"></script>
+
+        <!-- Validation Plugin Js -->
+        <script src="themes/js/jquery.validate.js"></script>
+
+        <!-- Custom Js -->
+        <script src="themes/js/admin.js"></script>
+        <script src="themes/js/pages/index.js"></script>
+        <script src="themes/js/pages/examples/sign-in.js"></script>
+
+        <!-- Demo Js -->
+        <script src="themes/js/demo.js"></script>
+        <!-- ________________ #THEME ________________ -->
+        <script type="text/javascript" src="js/index.js"></script>
+    </section>
+
+</body>
+</html>
