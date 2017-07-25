@@ -17,7 +17,7 @@ $(document).on("pageshow", "#pagebarang", function(){
 
 			// TAMPIL DATA PER BARANG
 			for (var i = 0; i < barang.length; i++) {
-				$("#konten-brg").append('<div class="col-md-12"> <div class="card"> <div class="header"> <h2> '+barang[i].nama+' <small><span class="badge bg-green">Rp. '+pisahKoma(barang[i].harga)+',-</span></small> </h2> </div> <div class="body"> <div id="aniimated-thumbnials" class="list-unstyled row clearfix"> <div class="col-md-12"> <a href="#pagedetailbrg" class="a-detail" data-sub-html="Description" param="'+barang[i].id+'"> <img class="img-responsive thumbnail" src="http://'+server+'/apilelang/'+barang[i].photo_path+'"> </a> </div> </div> <h5>Tanggal Lelang : <br/><br/> <span class="badge bg-red text-center">'+barang[i].tanggal_mulai.substr(0,10)+' s/d '+barang[i].tanggal_akhir.substr(0,10)+'</span></h5> <div> <p>'+barang[i].deskripsi+'</p> <div class="row"> <div class="col-xs-6"> <button type="button" class="btn btn-block btn-lg bg-deep-orange waves-effect btn-pilih" data-toggle="modal" data-target="#smallModal2" param="'+barang[i].id+'"><i class="material-icons">done</i> Pilih</button> </div> <div class="col-xs-6"> <a href="#pagedetailbrg" id="btndetailbrg" class="btn btn-block btn-lg bg-blue waves-effect a-detail" param="'+barang[i].id+'"><i class="material-icons">&#xe8ef;</i> Detail</a> </div> </div> </div> </div> </div> </div>');
+				$("#konten-brg").append('<div class="col-md-12"> <div class="card"> <div class="header"> <h2> '+barang[i].nama+' <small><span class="badge bg-green">Rp. '+pisahKoma(barang[i].harga)+',-</span></small> </h2> </div> <div class="body"> <div id="aniimated-thumbnials" class="list-unstyled row clearfix"> <div class="col-md-12"> <a href="#pagedetailbrg" class="a-detail" data-sub-html="Description" param="'+barang[i].id+'"> <img class="img-responsive thumbnail" src="http://'+server+'/apilelang/'+barang[i].photo_path+'"> </a> </div> </div> <h4>Tanggal Lelang :</h4> <p><span class="badge bg-cyan text-center">'+barang[i].tanggal_mulai.substr(0,10)+' s/d '+barang[i].tanggal_akhir.substr(0,10)+'</span> </p> <div> <p>'+(barang[i].deskripsi).substr(0,100)+'...</p> <div class="row"> <div class="col-xs-6"> <button type="button" class="btn btn-block btn-lg bg-deep-orange waves-effect btn-pilih" data-toggle="modal" data-target="#smallModal2" param="'+barang[i].id+'"><i class="material-icons">done</i> Pilih</button> </div> <div class="col-xs-6"> <a href="#pagedetailbrg" id="btndetailbrg" class="btn btn-block btn-lg bg-blue waves-effect a-detail" param="'+barang[i].id+'"><i class="material-icons">&#xe8ef;</i> Detail</a> </div> </div> </div> </div> </div> </div>');
 			}
 		//}
 	}
@@ -44,7 +44,8 @@ $("#konten-brg").on('click', 'button.btn-pilih', function(event){
 	function tampilDataSukses(data){
 	    //alert('mulai tampil data!');
 	    var barang = data;
-	    tglplus1 = addDays(barang[0].tanggal_akhir, 1);
+	    var tglplus1 = addDays(barang[0].tanggal_akhir, 1);
+
 	    //alert(tglplus1);
 	    var counttgl = tglplus1.substr(0,10).replace(/\-/g,'/');
 		$('#clock2').countdown(counttgl, function(event) {
@@ -82,10 +83,10 @@ $("#konten-brg").on('click', 'a.a-detail', function(event){
 	    $('#tdnama').append(barang[0].nama);
 	    $('#tdtglmulai').append(barang[0].tanggal_mulai.substr(0,10));
 	    $('#tdtglselesai').append(barang[0].tanggal_akhir.substr(0,10));
-	    $('#tdkategori').append(barang[0].kategori_id);
+	    $('#tdkategori').append(barang[0].nama_kategori);
 	    $('#tdhrgmin').append(pisahKoma(barang[0].harga));
 	    $('#tddeskripsi').append(barang[0].deskripsi);
-	    tglplus1 = addDays(barang[0].tanggal_akhir, 1);
+	    tglplus1 = addDays(barang[0].tanggal_akhir, 0);
 	    //alert(tglplus1);
 	    var counttgl = tglplus1.substr(0,10).replace(/\-/g,'/');
 		$('#clock').countdown(counttgl, function(event) {
