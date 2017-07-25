@@ -76,13 +76,13 @@
             <!-- Left Sidebar -->
             <aside id="leftsidebar" class="sidebar">
                 <!-- User Info -->
-                <!-- <div class="user-info">
+                <div class="user-info panel_profile" >
                     <div class="image">
                         <img src="themes/img/user.png" width="48" height="48" alt="User" />
                     </div>
                     <div class="info-container">
-                        <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">John Doe</div>
-                        <div class="email">john.doe@example.com</div>
+                        <div class="name panel_name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></div>
+                        <div class="email panel_rekening"></div>
                         <div class="btn-group user-helper-dropdown">
                             <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">&#xe313;</i>
                             <ul class="dropdown-menu pull-right">
@@ -94,12 +94,18 @@
                             </ul>
                         </div>
                     </div>
-                </div> -->
+                </div>
                 <!-- #User Info -->
                 <!-- Menu -->
                 <div class="menu">
                     <ul class="list">
                         <li class="header">MAIN NAVIGATION</li>
+                        <li>
+                            <a href="#" class="menu-dashboard" >
+                                <i class="material-icons">&#xe0cf;</i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
                         <li class="active">
                             <a href="index.html" class="menu-home">
                                 <i class="material-icons">home</i>
@@ -125,15 +131,21 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="menu-login">
+                            <a href="#" class="menu-about">
+                                <i class="material-icons">&#xe0cf;</i>
+                                <span>Tentang Kami</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="menu-login" >
                                 <i class="material-icons">&#xe899;</i>
                                 <span>Login</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="menu-about">
-                                <i class="material-icons">&#xe0cf;</i>
-                                <span>Tentang Kami</span>
+                            <a href="#" class="menu-logout">
+                                <i class="material-icons">&#xe899;</i>
+                                <span>Logout</span>
                             </a>
                         </li>
                     </ul>
@@ -405,6 +417,85 @@
             </div>
         </nav>
         <!-- #Top Bar -->
+        <!-- Left Sidebar -->
+        <section>
+            <!-- Left Sidebar -->
+            <aside id="leftsidebar" class="sidebar">
+                <!-- User Info -->
+                <div class="user-info">
+                    <div class="image">
+                        <img src="themes/img/user.png" width="48" height="48" alt="User" />
+                    </div>
+                    <div class="info-container">
+                        <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">John Doe</div>
+                        <div class="email">john.doe@example.com</div>
+                        <div class="btn-group user-helper-dropdown">
+                            <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">&#xe313;</i>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="#" class="menu-profil"><i class="material-icons">person</i>Profil</a></li>
+                                <li role="seperator" class="divider"></li>
+                                <li><a href="#" class="menu-trans"><i class="material-icons">&#xe915;</i>Transaksi</a></li>
+                                <li role="seperator" class="divider"></li>
+                                <li><a href="#" class="menu-logout"><i class="material-icons">input</i>Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- #User Info -->
+                <!-- Menu -->
+                <div class="menu">
+                    <ul class="list">
+                        <li class="header">MAIN NAVIGATION</li>
+                        <li>
+                            <a href="#" class="menu-home">
+                                <i class="material-icons">home</i>
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="#" class="menu-barang">
+                                <i class="material-icons">&#xe531;</i>
+                                <span>Barang Lelang</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="menu-jadwal">
+                                <i class="material-icons">today</i>
+                                <span>Jadwal Lelang</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="menu-syarat">
+                                <i class="material-icons">&#xe85e;</i>
+                                <span>Syarat dan Ketentuan</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="menu-login">
+                                <i class="material-icons">&#xe899;</i>
+                                <span>Login</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="menu-about">
+                                <i class="material-icons">&#xe0cf;</i>
+                                <span>Tentang Kami</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- #Menu -->
+                <!-- Footer -->
+                <div class="legal">
+                    <div class="copyright">
+                        &copy; 2017 <a href="javascript:void(0);"> Kelompok 2 OJT</a>.
+                    </div>
+                </div>
+                <!-- #Footer -->
+            </aside>
+            <!-- #END# Left Sidebar -->
+        </section>
+        <!-- #Left Sidebar -->
         <section class="content" >
             <br><br><br><br><br>
             <div class="container-fluid">
@@ -415,6 +506,12 @@
                             <!-- Slider -->
                             <section class="slider-detail-brg">
                                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                    <!-- Indicators -->
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#carousel-example-generic" data-slide-to="0" class=""></li>
+                                        <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
+                                        <li data-target="#carousel-example-generic" data-slide-to="2" class="active"></li>
+                                    </ol>
 
                                     <!-- Wrapper for slides -->
                                     <div class="carousel-inner" role="listbox">
@@ -711,8 +808,10 @@
     
     <!-- JAVASCRIPTS -->
     <section>
-        <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/jquery.min.js"></script>
+        <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
         <script>
             $(document).bind('mobileinit',function(){
                 $.mobile.keepNative = "select,input,label";
@@ -735,7 +834,6 @@
                 $('body').removeClass('overlay-open');
             });
         </script>
-        <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
         
 
         <!-- ________________ THEME ________________ -->
@@ -790,7 +888,7 @@
         <!-- Demo Js -->
         <script src="themes/js/demo.js"></script>
         <!-- ________________ #THEME ________________ -->
-        <script type="text/javascript" src="js/index.js"></script>
+       
     </section>
 
 </body>
