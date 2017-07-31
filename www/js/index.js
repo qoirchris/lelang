@@ -109,10 +109,7 @@ function dbSukses(){
     /*alert ('Database siap');*/
 }
 
-var server = 'localhost';
-
-/*var alamat3 = $.mobile.activePage[0].id;
-alert(alamat3); */ 
+var server = '192.168.8.104:70/server/';
 
 /*------------CEK STATUS LOGED/TIDAK-----------*/
 var ses_loged 		= sessionStorage.getItem('loged');
@@ -164,7 +161,7 @@ $(document).on("pageshow", "#pagebarang", function(){
 
 			// TAMPIL DATA PER BARANG
 			for (var i = 0; i < barang.length; i++) {
-				$("#konten-brg").append('<div class="col-md-12"> <div class="card"> <div class="header"> <h2> '+barang[i].nama+' <small><span class="badge bg-green">Rp. '+pisahKoma(barang[i].harga)+',-</span></small> </h2> </div> <div class="body"> <div id="aniimated-thumbnials" class="list-unstyled row clearfix"> <div class="col-md-12"> <a href="#pagedetailbrg" class="a-detail" data-sub-html="Description" param="'+barang[i].id+'"> <img class="img-responsive thumbnail" src="http://'+server+'/apilelang/'+barang[i].photo_path+'"> </a> </div> </div> <h4>Tanggal Lelang :</h4> <p><span class="badge bg-cyan text-center">'+barang[i].tanggal_mulai.substr(0,10)+' s/d '+barang[i].tanggal_akhir.substr(0,10)+'</span> </p> <div> <p>'+(barang[i].deskripsi).substr(0,100)+'...</p> <div class="row"> <div class="col-xs-6"> <button type="button" class="btn btn-block btn-lg bg-deep-orange waves-effect btn-pilih" data-toggle="modal" data-target="#smallModal2" param="'+barang[i].id+'"><i class="material-icons">done</i> Pilih</button> </div> <div class="col-xs-6"> <a href="#pagedetailbrg" id="btndetailbrg" class="btn btn-block btn-lg bg-blue waves-effect a-detail" param="'+barang[i].id+'"><i class="material-icons">&#xe8ef;</i> Detail</a> </div> </div> </div> </div> </div> </div>');
+				$("#konten-brg").append('<div class="col-md-12"> <div class="card"> <div class="header"> <h2> '+barang[i].nama+' <small><span class="badge bg-green">Rp. '+pisahKoma(barang[i].harga)+',-</span></small> </h2> </div> <div class="body"> <div id="aniimated-thumbnials" class="list-unstyled row clearfix"> <div class="col-md-12"> <a href="#pagedetailbrg" class="a-detail" data-sub-html="Description" param="'+barang[i].id+'"> <img class="img-responsive thumbnail" src="http://'+server+'/apilelang/'+barang[i].photo_path+'"> </a> </div> </div> <h5>Tanggal Lelang : <br/><br/> <span class="badge bg-red text-center">'+barang[i].tanggal_mulai.substr(0,10)+' s/d '+barang[i].tanggal_akhir.substr(0,10)+'</span></h5> <div> <p>'+barang[i].deskripsi+'</p> <div class="row"> <div class="col-xs-6"> <button type="button" class="btn btn-block btn-lg bg-deep-orange waves-effect btn-pilih" data-toggle="modal" data-target="#smallModal2" param="'+barang[i].id+'"><i class="material-icons">done</i> Pilih</button> </div> <div class="col-xs-6"> <a href="#pagedetailbrg" id="btndetailbrg" class="btn btn-block btn-lg bg-blue waves-effect a-detail" param="'+barang[i].id+'"><i class="material-icons">&#xe8ef;</i> Detail</a> </div> </div> </div> </div> </div> </div>');
 			}
 		//}
 	}
@@ -190,9 +187,8 @@ $("#konten-brg").on('click', 'button.btn-pilih', function(event){
 	});
 	function tampilDataSukses(data){
 	    //alert('mulai tampil data!');
-	    var barang = data;
-	    var tglplus1 = addDays(barang[0].tanggal_akhir, 1);
-
+	    var barang = data.data;
+	    tglplus1 = addDays(barang[0].tgl_akhir, 1);
 	    //alert(tglplus1);
 	    var counttgl = tglplus1.substr(0,10).replace(/\-/g,'/');
 		$('#clock2').countdown(counttgl, function(event) {
@@ -230,7 +226,7 @@ $("#konten-brg").on('click', 'a.a-detail', function(event){
 	    $('#tdnama').append(barang[0].nama);
 	    $('#tdtglmulai').append(barang[0].tanggal_mulai.substr(0,10));
 	    $('#tdtglselesai').append(barang[0].tanggal_akhir.substr(0,10));
-	    $('#tdkategori').append(barang[0].nama_kategori);
+	    $('#tdkategori').append(barang[0].kategori_id);
 	    $('#tdhrgmin').append(pisahKoma(barang[0].harga));
 	    $('#tddeskripsi').append(barang[0].deskripsi);
 	    tglplus1 = addDays(barang[0].tanggal_akhir, 1);
@@ -279,6 +275,8 @@ $(document).on("pagehide", '#pagedetailbrg', function(){
 	$('.menu-about').click(function(){
 		window.location = "#pageabout";
 	});
+	$('.menu-logout').click(logout);
+   
 // END ACTION MENU
 
 $('#btnpgprofilok').click(function(){
@@ -410,6 +408,40 @@ $('#btnlogin').click(function() {
 	}
 });
 
+/*-----------------PROSES LOGOUT-------------------*/
+function logout(){
+
+		if(confirm('Apakah anda yakin untuk Logout ?')) {
+            db.transaction(function(tx) {
+	          tx.executeSql(" UPDATE peserta SET id_peserta = ?, nama = ?, nomor_rekening = ?, nomor_telepon = ?, nik = ?, alamat = ?, email = ? ",
+	          [0, 0, 0, 0, 0, 0, 0 ] );
+	          tx.executeSql(" UPDATE unique_key SET id_unique_key = ?, peserta_id = ?, key = ?, status = ?, expired_date = ?, date_log = ?",
+	          [0, 0, 0, 0, 0, 0 ] );
+	          tx.executeSql(" UPDATE jaminan SET id_jaminan = ?, nominal = ?, unique_key_id = ? ",
+	          [0, 0, 0 ] );
+	        }, function(error) {
+	            alert("Ooops eror");
+	        }, function() {
+	          	sessionStorage.removeItem('loged');
+	          	sessionStorage.removeItem('id_unique_key');
+	            sessionStorage.removeItem('peserta_id');
+	            sessionStorage.removeItem('key');
+	            sessionStorage.removeItem('nama');
+	            sessionStorage.removeItem('nomor_rekening');
+
+	            $('.panel_name').empty();
+	        	$('.panel_rekening').empty();
+	        	$('.panel_profile').css('display','none');
+				$('.menu-dashboard').css('display','none');
+				$('.menu-login').css('display','');
+				$('.menu-logout').css('display','none');
+			        
+		        alert("Terimakasih ..");
+		        window.location = "#pagehome";	
+	        })
+        }
+        return false;
+}
 
 $(document).on("pageshow", "#pagejadwal", function(){
 	$.ajax({
