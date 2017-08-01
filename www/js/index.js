@@ -51,65 +51,72 @@ function createTable(tx) {
         ' CREATE TABLE IF NOT EXISTS jaminan (id_jaminan integer primary key, nominal text, unique_key_id integer )' 
         ); 
 
-      tx.executeSql('SELECT u.id_unique_key , u.peserta_id, u.key, p.nama, p.nomor_rekening '
-      + ' FROM peserta p, unique_key u where p.id_peserta = u.peserta_id', [], function (tx, results) {
-      var len 				= results.rows.length;
-      var id_unique_key 	= results.rows.item(0).id_unique_key;
-      var peserta_id 		= results.rows.item(0).peserta_id;
-      var key 				= results.rows.item(0).key;
-      var nama 				= results.rows.item(0).nama;
-      var nomor_rekening	= results.rows.item(0).nomor_rekening;
+       tx.executeSql('SELECT u.id_unique_key , u.peserta_id, u.key, p.nama, p.nomor_rekening FROM peserta p, unique_key u where p.id_peserta = u.peserta_id', [], querySuccess, errorCB);
 
-        if (len == 0) {
-              tx.executeSql('INSERT INTO peserta (id_peserta , nama, nomor_rekening, nomor_telepon, nik, alamat, email)'
-              + ' VALUES (0,0,0,0,0,0,0)');
-              tx.executeSql('INSERT INTO unique_key (id_unique_key , peserta_id, key, status, expired_date, date_log) '
-              + ' VALUES (0,0,0,0,0,0)');
-              tx.executeSql('INSERT INTO jaminan (id_jaminan , nominal, unique_key_id )'
-              + ' VALUES (0,0,0)');
-        }
-        else if (len == 1 && id_unique_key == 0 ) {
-            sessionStorage.removeItem('loged');
-            sessionStorage.removeItem('id_unique_key');
-            sessionStorage.removeItem('peserta_id');
-            sessionStorage.removeItem('key');
-            sessionStorage.removeItem('nama');
-            sessionStorage.removeItem('nomor_rekening');
+       function querySuccess(tx, results) {
+		    var len 				= results.rows.length;
+		    //alert(len);
+	        if (len == 0) {
+	              tx.executeSql('INSERT INTO peserta (id_peserta , nama, nomor_rekening, nomor_telepon, nik, alamat, email)'
+	              + ' VALUES (0,0,0,0,0,0,0)');
+	              tx.executeSql('INSERT INTO unique_key (id_unique_key , peserta_id, key, status, expired_date, date_log) '
+	              + ' VALUES (0,0,0,0,0,0)');
+	              tx.executeSql('INSERT INTO jaminan (id_jaminan , nominal, unique_key_id )'
+	              + ' VALUES (0,0,0)');
+	        }
+	        else if (len == 1 && id_unique_key == 0 ) {
+	            sessionStorage.removeItem('loged');
+	            sessionStorage.removeItem('id_unique_key');
+	            sessionStorage.removeItem('peserta_id');
+	            sessionStorage.removeItem('key');
+	            sessionStorage.removeItem('nama');
+	            sessionStorage.removeItem('nomor_rekening');
 
-            $('.panel_name').empty();
-        	$('.panel_rekening').empty();
-            $('.panel_profile').css('display','none');
-			$('.menu-dashboard').css('display','none');
-			$('.menu-login').css('display','');
-			$('.menu-logout').css('display','none');
-        }
-        else if (len == 1 && id_unique_key != 0 ) {
-            sessionStorage.setItem('loged','1');
-            sessionStorage.setItem('id_unique_key',id_unique_key);
-            sessionStorage.setItem('peserta_id',peserta_id);
-            sessionStorage.setItem('key',key);
-            sessionStorage.setItem('nama',nama);
-            sessionStorage.setItem('nomor_rekening',nomor_rekening);
+	            $('.panel_name').empty();
+	        	$('.panel_rekening').empty();
+	            $('.panel_profile').css('display','none');
+				$('.menu-dashboard').css('display','none');
+				$('.menu-login').css('display','');
+				$('.menu-logout').css('display','none');
+	        }
+	        else if (len == 1 && id_unique_key != 0 ) {
+	            var id_unique_key 	= results.rows.item(0).id_unique_key;
+			    var peserta_id 		= results.rows.item(0).peserta_id;
+			    var key 				= results.rows.item(0).key;
+			    var nama 				= results.rows.item(0).nama;
+			    var nomor_rekening	= results.rows.item(0).nomor_rekening;
+	            sessionStorage.setItem('loged','1');
+	            sessionStorage.setItem('id_unique_key',id_unique_key);
+	            sessionStorage.setItem('peserta_id',peserta_id);
+	            sessionStorage.setItem('key',key);
+	            sessionStorage.setItem('nama',nama);
+	            sessionStorage.setItem('nomor_rekening',nomor_rekening);
 
-        	$('.panel_name').append(nama);
-        	$('.panel_rekening').append(nomor_rekening);
-			$('.panel_profile').css('display','');
-			$('.menu-dashboard').css('display','');
-			$('.menu-login').css('display','none');
-			$('.menu-logout').css('display','');
-        }
-      }, null);
+	        	$('.panel_name').append(nama);
+	        	$('.panel_rekening').append(nomor_rekening);
+				$('.panel_profile').css('display','');
+				$('.menu-dashboard').css('display','');
+				$('.menu-login').css('display','none');
+				$('.menu-logout').css('display','');
+	        }
+		}
+
+		function errorCB(err) {
+		    alert("Error processing SQL: "+err.code);
+		}
+  
 }
 
 function dbGagal(tx,e){
-    alert('eror '+e);
+    alert('Aduh Error! '+e);
 }
 
 function dbSukses(){
-    /*alert ('Database siap');*/
+    alert ('Database siap');
 }
 
-var server = '192.168.8.104:70/server/';
+//var server = '.168.43.19242:80';
+var server = '192.168.43.42';
 
 /*------------CEK STATUS LOGED/TIDAK-----------*/
 var ses_loged 		= sessionStorage.getItem('loged');
@@ -187,8 +194,8 @@ $("#konten-brg").on('click', 'button.btn-pilih', function(event){
 	});
 	function tampilDataSukses(data){
 	    //alert('mulai tampil data!');
-	    var barang = data.data;
-	    tglplus1 = addDays(barang[0].tgl_akhir, 1);
+	    var barang = data;
+	    tglplus1 = addDays(barang[0].tanggal_akhir, 1);
 	    //alert(tglplus1);
 	    var counttgl = tglplus1.substr(0,10).replace(/\-/g,'/');
 		$('#clock2').countdown(counttgl, function(event) {
