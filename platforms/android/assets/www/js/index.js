@@ -112,7 +112,7 @@ function dbGagal(tx,e){
 }
 
 function dbSukses(){
-    alert ('Database siap');
+    alert ('Database OK.');
 }
 
 //var server = '.168.43.19242:80';
@@ -194,8 +194,8 @@ $("#konten-brg").on('click', 'button.btn-pilih', function(event){
 	});
 	function tampilDataSukses(data){
 	    //alert('mulai tampil data!');
-	    var barang = data.data;
-	    tglplus1 = addDays(barang[0].tgl_akhir, 1);
+	    var barang = data;
+	    tglplus1 = addDays(barang[0].tanggal_akhir, 1);
 	    //alert(tglplus1);
 	    var counttgl = tglplus1.substr(0,10).replace(/\-/g,'/');
 		$('#clock2').countdown(counttgl, function(event) {

@@ -112,7 +112,7 @@ function dbGagal(tx,e){
 }
 
 function dbSukses(){
-    alert ('Database siap');
+    alert ('Database OK.');
 }
 
 //var server = '.168.43.19242:80';
@@ -183,6 +183,8 @@ function pisahKoma(angka){
 }
 
 $("#konten-brg").on('click', 'button.btn-pilih', function(event){
+	$('#smallModalLabel2').empty();
+	$('.btnbid').attr('param', '');
 	var param = '&id='+$(this).attr('param');
 	$.ajax({
         method: 'post',
@@ -195,18 +197,23 @@ $("#konten-brg").on('click', 'button.btn-pilih', function(event){
 	function tampilDataSukses(data){
 	    //alert('mulai tampil data!');
 	    var barang = data;
+
 	    tglplus1 = addDays(barang[0].tanggal_akhir, 1);
 	    //alert(tglplus1);
 	    var counttgl = tglplus1.substr(0,10).replace(/\-/g,'/');
 		$('#clock2').countdown(counttgl, function(event) {
 		  var $this = $(this).html(event.strftime('<span class="label-waktu label-danger">%dh %Hj %Mm %Sd</span>'));
 		});
+		$('#smallModalLabel2').append(barang[0].nama);
+		$('.btnbid').attr('param', barang[0].id);
 
 	}
 });
 
 
 $("#konten-brg").on('click', 'a.a-detail', function(event){
+    $('#smallModalLabel').empty();
+	$('.btnbid').attr('param', '');
     var param = '&id='+$(this).attr('param');
     //$('#btfrsimpan').attr('param',$(this).attr('param')); 
     //alert(param);
@@ -242,7 +249,10 @@ $("#konten-brg").on('click', 'a.a-detail', function(event){
 		$('#clock').countdown(counttgl, function(event) {
 		  var $this = $(this).html(event.strftime('<span class="label-waktu label-danger">%dh %Hj %Mm %Sd</span>'));
 		});
+		$('#smallModalLabel').append(barang[0].nama);
+		$('.btnbid').attr('param', barang[0].id);
 	}
+
 });
 
 function addDays(date, days) {
