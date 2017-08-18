@@ -150,20 +150,9 @@ $(document).on("pageshow", "#pagelogin", function(){
 	}
 });
 
-$('.btnbid').click(function(){
-	var logged = sessionStorage.getItem('loged');
-	$('.inpbid').val('');
-	if (logged == '1') {
-		alert('Langsung Query!');
-		alert(logged);
-	} else {
-		alert('Masuk ke Login!');
-		alert(logged);
-	}
-});
-
 
 $(document).on("pageshow", "#pagebarang", function(){
+	$('#smallModal2').css("display", "none");
 	// TAMPIL DATA
 	$.ajax({
         method: 'get',
@@ -280,7 +269,7 @@ $(document).on("pagehide", '#pagedetailbrg', function(){
 	$('#smallModal').css("display", "none");
 	$('#smallModal').removeClass("in");
 
-	$('.modal-backdrop').remove();
+	$('div').removeClass('modal-backdrop');
 	$('body').removeClass("modal-open");
 });
 
@@ -468,7 +457,7 @@ function logout(){
 				$('.menu-logout').css('display','none');
 			        
 		        alert("Terimakasih ..");
-		        window.location = "#pagehome";	
+		        window.location = "#pagehome";
 	        })
         }
         return false;
@@ -495,7 +484,59 @@ $(document).on("pageshow", "#pagejadwal", function(){
 
 $('.btn-pilih').click(function(){
 	$('.inpbid').val('');
-	$('.inpbid').focus();
 });
 
+// INPUT QUERY
+$('.btnbid').click(function(){
+	var jmlbid = $('.inpbid').val().replace(/\./g,"");
+	var jmlbid2 = $('.inpbid2').val().replace(/\./g,"");
+	var id_unique_key = sessionStorage.getItem('id_unique_key');
+	var id_prop = $('.btnbid').attr('param');
+	var id_prop2 = $('.btnbid').attr('param2');
+	var logged = sessionStorage.getItem('loged');
+	$('.inpbid').val('');
+	$('.inpbid2').val('');
 
+	if (jmlbid == '' && jmlbid2 == '') {
+		alert('Jumlah Penawaran Tidak Boleh Kosong!');
+	} else {
+		if (logged == '1') {
+			//alert('Langsung Query!');
+			//alert(logged);
+			// alert('properti_id : '+id_prop);
+			// alert('unique_key_id : '+id_unique_key);
+			// alert('penawaran : '+jmlbid);
+			if (jmlbid2 == '') {
+				var data = "&prop_id="+id_prop+"&key_id="+id_unique_key+"&penawaran="+jmlbid;
+			} else {
+				var data = "&prop_id="+id_prop2+"&key_id="+id_unique_key+"&penawaran="+jmlbid2;
+			}
+			$.ajax({
+			method : 'post',
+			data : data,
+			dataType : 'json' ,
+			url : 'http://'+server+'/apilelang/inserttx.php',
+			success: function(data){
+		        var tx = data;
+		        // console.log(biodata.data);
+		        if(tx.status == 1)
+		          {
+		          	alert(tx.msg);
+		          	$('#smallModal2').css("display", "none");
+					$('#smallModal2').removeClass("in");
+
+					$('div').removeClass('modal-backdrop');
+					$('body').removeClass("modal-open");
+		          	window.location = "#pagehome";
+		          } else {
+		          	alert(tx.msg);	
+		          }
+		        }
+		});
+		} else {
+			window.location = '#pagelogin';
+			$('body').removeClass("modal-open");
+			$('div').removeClass('modal-backdrop');
+		}
+	}
+});

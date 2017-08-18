@@ -150,18 +150,6 @@ $(document).on("pageshow", "#pagelogin", function(){
 	}
 });
 
-$('.btnbid').click(function(){
-	var logged = sessionStorage.getItem('loged');
-	$('.inpbid').val('');
-	if (logged == '1') {
-		alert('Langsung Query!');
-		alert(logged);
-	} else {
-		alert('Masuk ke Login!');
-		alert(logged);
-	}
-});
-
 
 $(document).on("pageshow", "#pagebarang", function(){
 	// TAMPIL DATA
@@ -180,7 +168,7 @@ $(document).on("pageshow", "#pagebarang", function(){
 
 			// TAMPIL DATA PER BARANG
 			for (var i = 0; i < barang.length; i++) {
-				$("#konten-brg").append('<div class="col-md-12"> <div class="card"> <div class="header"> <h2> '+barang[i].nama+' <small><span class="badge bg-green">Rp. '+pisahKoma(barang[i].harga)+',-</span></small> </h2> </div> <div class="body"> <div id="aniimated-thumbnials" class="list-unstyled row clearfix"> <div class="col-md-12"> <a href="#pagedetailbrg" class="a-detail" data-sub-html="Description" param="'+barang[i].id+'"> <img class="img-responsive thumbnail" src="http://'+server+'/apilelang/'+barang[i].photo_path+'"> </a> </div> </div> <h5>Tanggal Lelang : <br/><br/> <span class="badge bg-red text-center">'+barang[i].tanggal_mulai.substr(0,10)+' s/d '+barang[i].tanggal_akhir.substr(0,10)+'</span></h5> <div> <p>'+barang[i].deskripsi.substr(0,100)+'...'+'</p> <div class="row"> <div class="col-xs-6"> <button type="button" class="btn btn-block btn-lg bg-deep-orange waves-effect btn-pilih" data-toggle="modal" data-target="#smallModal2" param="'+barang[i].id+'"><i class="material-icons">done</i> Pilih</button> </div> <div class="col-xs-6"> <a href="#pagedetailbrg" id="btndetailbrg" class="btn btn-block btn-lg bg-blue waves-effect a-detail" param="'+barang[i].id+'"><i class="material-icons">&#xe8ef;</i> Detail</a> </div> </div> </div> </div> </div> </div>');
+				$("#konten-brg").append('<div class="col-md-12"> <div class="card"> <div class="header"> <h2> '+barang[i].nama+' <small><span class="badge bg-green">Rp. '+pisahKoma(barang[i].harga)+',-</span></small> </h2> </div> <div class="body"> <div id="aniimated-thumbnials" class="list-unstyled row clearfix"> <div class="col-md-12"> <a href="#pagedetailbrg" class="a-detail" data-sub-html="Description" param="'+barang[i].id+'"> <img class="img-responsive thumbnail" src="http://'+server+'/apilelang/'+barang[i].photo_path+'"> </a> </div> </div> <h5>Tanggal Lelang : <br/><br/> <span class="badge bg-red text-center">'+barang[i].tanggal_mulai.substr(0,10)+' s/d '+barang[i].tanggal_akhir.substr(0,10)+'</span></h5> <div> <p>'+barang[i].deskripsi.substr(0,100)+'...'+'</p> <div class="row"> <div class="col-xs-6"> <a href="#pagebid" class="btn btn-block btn-lg bg-deep-orange waves-effect btn-pilih" param="'+barang[i].id+'"><i class="material-icons">done</i> Pilih</a> </div> <div class="col-xs-6"> <a href="#pagedetailbrg" id="btndetailbrg" class="btn btn-block btn-lg bg-blue waves-effect btn-pilih" param="'+barang[i].id+'"><i class="material-icons">&#xe8ef;</i> Detail</a> </div> </div> </div> </div> </div> </div>');
 			}
 		//}
 	}
@@ -194,12 +182,14 @@ function pisahKoma(angka){
 	return angka.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
-$("#konten-brg").on('click', 'button.btn-pilih', function(event){
-	$('#smallModalLabel2').empty();
+var selected = "";
+
+$("#konten-brg").on('click', 'a.btn-pilih', function(event){
+	$('#namaprop').empty();
 	$('.inpbid').val('');
-	$('.inpbid').focus();
 	$('.btnbid').attr('param', '');
 	var param = '&id='+$(this).attr('param');
+	selected = $(this).attr('param');
 	$.ajax({
         method: 'post',
         url: 'http://'+server+'/apilelang/tampil.php',
@@ -208,38 +198,6 @@ $("#konten-brg").on('click', 'button.btn-pilih', function(event){
         success: tampilDataSukses,
         error: pesanGagal
 	});
-	function tampilDataSukses(data){
-	    //alert('mulai tampil data!');
-	    var barang = data;
-
-	    tglplus1 = addDays(barang[0].tanggal_akhir, 1);
-	    //alert(tglplus1);
-	    var counttgl = tglplus1.substr(0,10).replace(/\-/g,'/');
-		$('#clock2').countdown(counttgl, function(event) {
-		  var $this = $(this).html(event.strftime('<span class="label-waktu label-danger">%dh %Hj %Mm %Sd</span>'));
-		});
-		$('#smallModalLabel2').append(barang[0].nama);
-		$('.btnbid').attr('param', barang[0].id);
-
-	}
-});
-
-
-$("#konten-brg").on('click', 'a.a-detail', function(event){
-    $('#smallModalLabel').empty();
-	$('.btnbid').attr('param', '');
-    var param = '&id='+$(this).attr('param');
-    //$('#btfrsimpan').attr('param',$(this).attr('param')); 
-    //alert(param);
-    $.ajax({
-        method: 'post',
-        url: 'http://'+server+'/apilelang/tampil.php',
-        data: param,
-        dataType: 'json',
-        success: tampilDataSukses,
-        error: pesanGagal
-	});
-
 	function tampilDataSukses(data){
 	    //alert('mulai tampil data!');
 	    var barang = data;
@@ -257,16 +215,16 @@ $("#konten-brg").on('click', 'a.a-detail', function(event){
 	    $('#tdkategori').append(barang[0].nama_kategori);
 	    $('#tdhrgmin').append(pisahKoma(barang[0].harga));
 	    $('#tddeskripsi').append(barang[0].deskripsi);
+
 	    tglplus1 = addDays(barang[0].tanggal_akhir, 1);
 	    //alert(tglplus1);
 	    var counttgl = tglplus1.substr(0,10).replace(/\-/g,'/');
-		$('#clock').countdown(counttgl, function(event) {
+		$('#clock2').countdown(counttgl, function(event) {
 		  var $this = $(this).html(event.strftime('<span class="label-waktu label-danger">%dh %Hj %Mm %Sd</span>'));
 		});
-		$('#smallModalLabel').append(barang[0].nama);
-		$('.btnbid').attr('param', barang[0].id);
+		$('#namaprop').append(barang[0].nama);
+		$('.btnbid').attr('param', selected);
 	}
-
 });
 
 function addDays(date, days) {
@@ -275,14 +233,6 @@ function addDays(date, days) {
     var tgl = result.getFullYear()+'/'+(result.getMonth()+1)+'/'+result.getDate();
     return tgl;
 }
-
-$(document).on("pagehide", '#pagedetailbrg', function(){
-	$('#smallModal').css("display", "none");
-	$('#smallModal').removeClass("in");
-
-	$('.modal-backdrop').remove();
-	$('body').removeClass("modal-open");
-});
 
 // ACTION MENU
 	$('.menu-home').click(function(){
@@ -307,6 +257,9 @@ $(document).on("pagehide", '#pagedetailbrg', function(){
 		window.location = "#pageabout";
 	});
 	$('.menu-logout').click(logout);
+	$('#btnhome').click(function(){
+		window.location = "#pagehome";
+	});
    
 // END ACTION MENU
 
@@ -468,7 +421,7 @@ function logout(){
 				$('.menu-logout').css('display','none');
 			        
 		        alert("Terimakasih ..");
-		        window.location = "#pagehome";	
+		        window.location = "#pagehome";
 	        })
         }
         return false;
@@ -493,9 +446,48 @@ $(document).on("pageshow", "#pagejadwal", function(){
 	}
 });
 
-$('.btn-pilih').click(function(){
+// $('.btn-pilih').click(function(){
+// 	$('.inpbid').val('');
+// });
+
+// INPUT QUERY
+$('.btnbid').click(function(){
+	var jmlbid = $('.inpbid').val().replace(/\./g,"");
+	var id_unique_key = sessionStorage.getItem('id_unique_key');
+	var id_prop = $('.btnbid').attr('param');
+	var logged = sessionStorage.getItem('loged');
 	$('.inpbid').val('');
-	$('.inpbid').focus();
+
+	if (jmlbid == '') {
+		alert('Jumlah Penawaran Tidak Boleh Kosong!');
+	} else {
+		if (logged == '1') {
+			//alert('Langsung Query!');
+			//alert(logged);
+			// alert('properti_id : '+id_prop);
+			// alert('unique_key_id : '+id_unique_key);
+			// alert('penawaran : '+jmlbid);
+			
+			var data = "&prop_id="+id_prop+"&key_id="+id_unique_key+"&penawaran="+jmlbid;
+			$.ajax({			
+			method : 'post',
+			data : data,
+			dataType : 'json' ,
+			url : 'http://'+server+'/apilelang/inserttx.php',
+			success: function(data){
+		        var tx = data;
+		        // console.log(biodata.data);
+		        if(tx.status == 1)
+		          {
+		          	alert(tx.msg);
+		          	window.location = "#pagehome";
+		          } else {
+		          	alert(tx.msg);	
+		          }
+		        }
+		});
+		} else {
+			window.location = '#pagelogin';
+		}
+	}
 });
-
-

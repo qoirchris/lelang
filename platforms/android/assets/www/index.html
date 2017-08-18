@@ -570,7 +570,7 @@
                                         <div class="col-xs-12">
                                             <div class="form-group form-float form-group-lg">
                                                 <div class="form-line">
-                                                    <input class="form-control text-center inpbid" type="text">
+                                                    <input class="form-control text-center inpbid2" type="text">
                                                     <label class="form-label">Jumlah Penawaran</label>
                                                 </div>
                                             </div>
@@ -578,7 +578,7 @@
                                         <div class="modal-footer">
                                             <div class="row">
                                                 <div class="col-xs-6">
-                                                    <button type="button" class="btn btn-block btn-lg bg-green waves-effect btnbid" param=""><i class="material-icons">done</i> OK</button>
+                                                    <button type="button" class="btn btn-block btn-lg bg-green waves-effect btnbid" param2=""><i class="material-icons">done</i> OK</button>
                                                 </div>
                                                 <div class="col-xs-6">
                                                     <button type="button" class="btn btn-block btn-lg bg-deep-orange waves-effect" data-dismiss="modal"><i class="material-icons">clear</i> Batal</button>
@@ -589,7 +589,7 @@
                                 </div>
                             </div>
 
-                        </div>
+                        </div>  
                     </div>
                 </div>
                 <!-- __________ #DETAIL BARANG __________ -->
@@ -803,6 +803,17 @@
             });
 
             $('.inpbid').keyup(function(event){
+                // skip untuk arrow key
+                if(event.which >= 37 && event.which <= 40) return;
+
+                // format nomor
+                $(this).val(function(index, value){
+                    return value
+                    .replace(/\D/g, "")
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+                });
+            });
+            $('.inpbid2').keyup(function(event){
                 // skip untuk arrow key
                 if(event.which >= 37 && event.which <= 40) return;
 
