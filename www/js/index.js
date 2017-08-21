@@ -168,7 +168,7 @@ $(document).on("pageshow", "#pagebarang", function(){
 
 			// TAMPIL DATA PER BARANG
 			for (var i = 0; i < barang.length; i++) {
-				$("#konten-brg").append('<div class="col-md-12"> <div class="card"> <div class="header"> <h2> '+barang[i].nama+' <small><span class="badge bg-green">Rp. '+pisahKoma(barang[i].harga)+',-</span></small> </h2> </div> <div class="body"> <div id="aniimated-thumbnials" class="list-unstyled row clearfix"> <div class="col-md-12"> <a href="#pagedetailbrg" class="a-detail" data-sub-html="Description" param="'+barang[i].id+'"> <img class="img-responsive thumbnail" src="http://'+server+'/apilelang/'+barang[i].photo_path+'"> </a> </div> </div> <h5>Tanggal Lelang : <br/><br/> <span class="badge bg-red text-center">'+barang[i].tanggal_mulai.substr(0,10)+' s/d '+barang[i].tanggal_akhir.substr(0,10)+'</span></h5> <div> <p>'+barang[i].deskripsi.substr(0,100)+'...'+'</p> <div class="row"> <div class="col-xs-6"> <a href="#pagebid" class="btn btn-block btn-lg bg-deep-orange waves-effect btn-pilih" param="'+barang[i].id+'"><i class="material-icons">done</i> Pilih</a> </div> <div class="col-xs-6"> <a href="#pagedetailbrg" id="btndetailbrg" class="btn btn-block btn-lg bg-blue waves-effect btn-pilih" param="'+barang[i].id+'"><i class="material-icons">&#xe8ef;</i> Detail</a> </div> </div> </div> </div> </div> </div>');
+				$("#konten-brg").append('<div class="col-md-12"> <div class="card"> <div class="header"> <h2> '+barang[i].nama+' <small><span class="badge bg-green">Rp. '+pisahKoma(barang[i].harga)+',-</span></small> </h2> </div> <div class="body"> <div id="aniimated-thumbnials" class="list-unstyled row clearfix"> <div class="col-md-12"> <a href="#pagedetailbrg" class="a-detail" data-sub-html="Description" param="'+barang[i].id+'"> <img class="img-responsive thumbnail" src="http://'+server+'/apilelang/'+barang[i].photo_path+'"> </a> </div> </div> <h5>Tanggal Lelang : <br/><br/> <span class="badge bg-red text-center">'+barang[i].tanggal_mulai.substr(0,10)+' s/d '+barang[i].tanggal_akhir.substr(0,10)+'</span></h5> <div> <p>'+barang[i].deskripsi.substr(0,100)+' ....'+'</p> <div class="row"> <div class="col-xs-6"> <a href="#pagebid" class="btn btn-block btn-lg bg-deep-orange waves-effect btn-pilih" param="'+barang[i].id+'"><i class="material-icons">done</i> Pilih</a> </div> <div class="col-xs-6"> <a href="#pagedetailbrg" id="btndetailbrg" class="btn btn-block btn-lg bg-blue waves-effect btn-pilih" param="'+barang[i].id+'"><i class="material-icons">&#xe8ef;</i> Detail</a> </div> </div> </div> </div> </div> </div>');
 			}
 		//}
 	}
@@ -446,10 +446,6 @@ $(document).on("pageshow", "#pagejadwal", function(){
 	}
 });
 
-// $('.btn-pilih').click(function(){
-// 	$('.inpbid').val('');
-// });
-
 // INPUT QUERY
 $('.btnbid').click(function(){
 	var jmlbid = $('.inpbid').val().replace(/\./g,"");
@@ -462,11 +458,6 @@ $('.btnbid').click(function(){
 		alert('Jumlah Penawaran Tidak Boleh Kosong!');
 	} else {
 		if (logged == '1') {
-			//alert('Langsung Query!');
-			//alert(logged);
-			// alert('properti_id : '+id_prop);
-			// alert('unique_key_id : '+id_unique_key);
-			// alert('penawaran : '+jmlbid);
 			
 			var data = "&prop_id="+id_prop+"&key_id="+id_unique_key+"&penawaran="+jmlbid;
 			$.ajax({			
