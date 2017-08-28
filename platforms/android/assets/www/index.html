@@ -174,13 +174,13 @@
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner" role="listbox">
                         <div class="item">
-                            <img src="themes/img/image-gallery/13.jpg">
+                            <img src="themes/img/1.png">
                         </div>
                         <div class="item active left">
-                            <img src="themes/img/image-gallery/18.jpg">
+                            <img src="themes/img/2.png">
                         </div>
                         <div class="item next left">
-                            <img src="themes/img/image-gallery/19.jpg">
+                            <img src="themes/img/3.png">
                         </div>
                     </div>
 
@@ -206,14 +206,25 @@
             
                 <!-- Widgets -->
                 <div class="row clearfix">
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <!-- <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
                         <div class="info-box bg-pink hover-expand-effect">
                             <div class="icon">
                                 <i class="material-icons">assignment</i>
                             </div>
                             <div class="content">
-                                <div class="text">INVENTARIS</div>
-                                <div class="number count-to" data-from="0" data-to="125" data-speed="15" data-fresh-interval="20"></div>
+                                <div class="text">PROPERTI</div>
+                                <div class="number count-to" data-from="0" data-to="" data-speed="15" data-fresh-interval="20" id="dashprop"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                        <div class="info-box bg-orange hover-expand-effect">
+                            <div class="icon">
+                                <i class="material-icons">people</i>
+                            </div>
+                            <div class="content">
+                                <div class="text">PESERTA</div>
+                                <div class="number count-to" data-from="0" data-to="" data-speed="1000" data-fresh-interval="20" id="dashpes"></div>
                             </div>
                         </div>
                     </div>
@@ -223,46 +234,21 @@
                                 <i class="material-icons">gavel</i>
                             </div>
                             <div class="content">
-                                <div class="text">PENAWARAN</div>
-                                <div class="number count-to" data-from="0" data-to="257" data-speed="1000" data-fresh-interval="20"></div>
+                                <div class="text">PENAWARAN / TRANSAKSI</div>
+                                <div class="number count-to" data-from="0" data-to="0" data-speed="1000" data-fresh-interval="20" id="dashtx"></div>
                             </div>
                         </div>
+                    </div> -->
+                    
+                    <br>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <a href="#pagebarang" class="btn btn-block btn-lg-custom bg-deep-orange waves-effect">
+                        LIHAT BARANG
+                        </a>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <div class="info-box bg-light-green hover-expand-effect">
-                            <div class="icon">
-                                <i class="material-icons">&#xe915;</i>
-                            </div>
-                            <div class="content">
-                                <div class="text">TRANSAKSI</div>
-                                <div class="number count-to" data-from="0" data-to="243" data-speed="1000" data-fresh-interval="20"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <div class="info-box bg-orange hover-expand-effect">
-                            <div class="icon">
-                                <i class="material-icons">people</i>
-                            </div>
-                            <div class="content">
-                                <div class="text">PESERTA</div>
-                                <div class="number count-to" data-from="0" data-to="1225" data-speed="1000" data-fresh-interval="20"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <a href="#pagebarang">
-                        <div class="info-box bg-red hover-expand-effect text-center">
-                            <div class="icon">
-                                <i class="material-icons">pageview</i>
-                            </div>
-                            
-                            <div class="content">
-                                <div class="text"><h3>LIHAT BARANG</h3></div>
-                            </div>
-                            
-                        </div>
+                        <a href="#pagejadwal" class="btn btn-block btn-lg-custom bg-green waves-effect">
+                        JADWAL LELANG
                         </a>
                     </div>
                 </div>
@@ -271,7 +257,6 @@
         </section>
         </div>
     </div>
-    <!-- ________________ #PAGE HOME ________________ -->
 
     <!-- ________________ LOGIN ________________ -->
     <div data-role="page" id="pagelogin">
@@ -296,7 +281,7 @@
                                 <button class="btn btn-block btn-lg bg-pink waves-effect" id="btnlogin" disabled="true"><i class="material-icons">input</i> LOGIN</button>
                             </div>
                             <div class="col-xs-6">
-                                <button class="btn btn-block btn-lg bg-green waves-effect"><i class="material-icons">&#xe325;</i> SCAN</button>
+                                <button class="btn btn-block btn-lg bg-green waves-effect" id="btnhome"><i class="material-icons">home</i> HOME</button>
                             </div>
                         </div>
                         <div class="row m-t-15 m-b--20">
@@ -312,7 +297,6 @@
         </div>
         </div>    
     </div>
-    <!-- ________________ #LOGIN ________________ -->
 
     <!-- ________________ PAGE BARANG ________________ -->
     <div data-role="page" id="pagebarang">
@@ -353,46 +337,85 @@
                 <div class="block-header">
                     <h2>DAFTAR BARANG LELANG</h2>
                 </div>
+                
                 <div id="konten-brg">
                 </div>
-                <!-- Small Size -->
-                    <div class="modal fade" id="smallModal2" tabindex="-1" role="dialog">
-                        <div class="modal-dialog modal-sm" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title" id="smallModalLabel2"></h4>
-                                </div>
-                                <div class="modal-body text-center">
-                                    <h3>Sisa Waktu</h3>
-                                    <div id="clock2"></div>
-                                    <!-- <span class="label-waktu label-danger">01:06:43:20</span> -->
-                                </div><br>
-                                <div class="col-xs-12">
-                                    <div class="form-group form-float form-group-lg">
-                                        <div class="form-line">
-                                            <input class="form-control text-center inpbid" type="text">
-                                            <label class="form-label">Jumlah Penawaran</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <div class="row">
-                                        <div class="col-xs-6">
-                                            <button type="button" class="btn btn-block btn-lg bg-green waves-effect btnbid"><i class="material-icons" param="">done</i> OK</button>
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <button type="button" class="btn btn-block btn-lg bg-deep-orange waves-effect" data-dismiss="modal"><i class="material-icons">clear</i> Batal</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                
             </div>
         </section>
         </div>
     </div>
-    <!-- ________________ #PAGE BARANG ________________ -->
+
+    <!-- ________________ PAGE BID ________________ -->
+    <div data-role="page" id="pagebid">
+        <div class="theme-indigo">
+        <!-- Page Loader -->
+        <div class="page-loader-wrapper">
+            <div class="loader">
+                <div class="preloader">
+                    <div class="spinner-layer pl-red">
+                        <div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+                </div>
+                <p>Please wait...</p>
+            </div>
+        </div>
+        <!-- #Page Loader -->
+        <!-- Top Bar -->
+        <nav class="navbar">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a href="#pagebarang" class=""><i class="material-icons-custom">&#xe5c4;</i></a>
+                    <div class="navbar-brand text-center">
+                    <a href="#"><img src="img/logo-lelang.png" style="max-height: 100%; width: 70%;height: 90%;padding-top: 1%;"></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!-- #Top Bar -->     
+        <section class="content" >
+            <br><br><br><br><br>
+            <!-- Input -->
+            <div class="container-fluid">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                                PENAWARAN
+                                <small id="namaprop"></small>
+                            </h2>
+                        </div>
+                        <div class="body text-center">
+                            <div class="form-group form-group-lg">
+                            <h3>Sisa Waktu</h3>
+                            <div id="clock2"></div>
+                            <br>
+                                <div class="form-line">
+                                    <input type="text" class="form-control inpbid" placeholder="Jumlah Penawaran" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <a href="#" class="btn btn-block btn-lg bg-green waves-effect btnbid"><i class="material-icons" param="">done</i> OK</a>
+                                </div>
+                                <div class="col-xs-6">
+                                    <a href="#pagebarang" class="btn btn-block btn-lg bg-deep-orange waves-effect" data-dismiss="modal"><i class="material-icons">clear</i> Batal</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- #END# Input -->
+        </section>
+        </div>
+    </div>
 
     <!-- ________________ PAGE DETAIL BARANG ________________ -->
     <div data-role="page" id="pagedetailbrg">
@@ -409,85 +432,6 @@
             </div>
         </nav>
         <!-- #Top Bar -->
-        <!-- Left Sidebar -->
-        <section>
-            <!-- Left Sidebar -->
-            <aside id="leftsidebar" class="sidebar">
-                <!-- User Info -->
-                <div class="user-info">
-                    <div class="image">
-                        <img src="themes/img/user.png" width="48" height="48" alt="User" />
-                    </div>
-                    <div class="info-container">
-                        <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">John Doe</div>
-                        <div class="email">john.doe@example.com</div>
-                        <div class="btn-group user-helper-dropdown">
-                            <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">&#xe313;</i>
-                            <ul class="dropdown-menu pull-right">
-                                <li><a href="#" class="menu-profil"><i class="material-icons">person</i>Profil</a></li>
-                                <li role="seperator" class="divider"></li>
-                                <li><a href="#" class="menu-trans"><i class="material-icons">&#xe915;</i>Transaksi</a></li>
-                                <li role="seperator" class="divider"></li>
-                                <li><a href="#" class="menu-logout"><i class="material-icons">input</i>Logout</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- #User Info -->
-                <!-- Menu -->
-                <div class="menu">
-                    <ul class="list">
-                        <li class="header">MAIN NAVIGATION</li>
-                        <li>
-                            <a href="#" class="menu-home">
-                                <i class="material-icons">home</i>
-                                <span>Home</span>
-                            </a>
-                        </li>
-                        <li class="active">
-                            <a href="#" class="menu-barang">
-                                <i class="material-icons">&#xe531;</i>
-                                <span>Barang Lelang</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="menu-jadwal">
-                                <i class="material-icons">today</i>
-                                <span>Jadwal Lelang</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="menu-syarat">
-                                <i class="material-icons">&#xe85e;</i>
-                                <span>Syarat dan Ketentuan</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="menu-login">
-                                <i class="material-icons">&#xe899;</i>
-                                <span>Login</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="menu-about">
-                                <i class="material-icons">&#xe0cf;</i>
-                                <span>Tentang Kami</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- #Menu -->
-                <!-- Footer -->
-                <div class="legal">
-                    <div class="copyright">
-                        &copy; 2017 <a href="javascript:void(0);"> Kelompok 2 OJT</a>.
-                    </div>
-                </div>
-                <!-- #Footer -->
-            </aside>
-            <!-- #END# Left Sidebar -->
-        </section>
-        <!-- #Left Sidebar -->
         <section class="content" >
             <br><br><br><br><br>
             <div class="container-fluid">
@@ -552,43 +496,8 @@
                                     <button type="button" class="btn btn-block btn-lg bg-red waves-effect" data-type="html-message"><i class="material-icons">gavel</i> Ikut Lelang</button>
                                 </div>  -->
                             </div>
-                            <button type="button" class="btn btn-block bt-lg bg-red waves-effect btn-pilih" data-toggle="modal" data-target="#smallModal"><i class="material-icons">gavel</i> Ikut Lelang</button>
+                            <a href="#pagebid" class="btn btn-block bt-lg bg-red waves-effect"><i class="material-icons">gavel</i> Ikut Lelang</a>
                             </div>
-
-                            <!-- Small Size -->
-                            <div class="modal fade" id="smallModal" tabindex="-1" role="dialog">
-                                <div class="modal-dialog modal-sm" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title" id="smallModalLabel"></h4>
-                                        </div>
-                                        <div class="modal-body text-center">
-                                            <h3>Sisa Waktu</h3>
-                                            <div id="clock"></div>
-                                            <!-- <span class="label-waktu label-danger">01:06:43:20</span> -->
-                                        </div><br>
-                                        <div class="col-xs-12">
-                                            <div class="form-group form-float form-group-lg">
-                                                <div class="form-line">
-                                                    <input class="form-control text-center inpbid2" type="text">
-                                                    <label class="form-label">Jumlah Penawaran</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <div class="row">
-                                                <div class="col-xs-6">
-                                                    <button type="button" class="btn btn-block btn-lg bg-green waves-effect btnbid" param2=""><i class="material-icons">done</i> OK</button>
-                                                </div>
-                                                <div class="col-xs-6">
-                                                    <button type="button" class="btn btn-block btn-lg bg-deep-orange waves-effect" data-dismiss="modal"><i class="material-icons">clear</i> Batal</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>  
                     </div>
                 </div>

@@ -2485,7 +2485,7 @@ section.content {
   -ms-border-radius: 2px;
   border-radius: 2px;
   border: none;
-  font-size: 18px;
+  font-size: 20px;
   outline: none; }
   .btn:not(.btn-link):not(.btn-circle):hover {
     outline: none; }
@@ -3125,7 +3125,7 @@ section.content {
   background-color: #fff;
   position: relative;
   overflow: hidden;
-  margin-bottom: 10px; }
+  margin-bottom: 5px; }
   .info-box .icon {
     display: inline-block;
     text-align: center;
@@ -4286,7 +4286,8 @@ section.content {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   -ms-border-radius: 0;
-  border-radius: 0; }
+  border-radius: 0;
+   }
   .thumbnail p:not(button) {
     color: #999999;
     font-size: 14px; }

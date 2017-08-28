@@ -79,7 +79,7 @@ function createTable(tx) {
 				$('.menu-login').css('display','');
 				$('.menu-logout').css('display','none');
 	        }
-	        else if (len == 1 && id_unique_key != 0 ) {
+	        else if (len == 1 && id_unique_key > 0 ) {
 	            var id_unique_key 	= results.rows.item(0).id_unique_key;
 			    var peserta_id 		= results.rows.item(0).peserta_id;
 			    var key 				= results.rows.item(0).key;
@@ -116,7 +116,7 @@ function dbSukses(){
 }
 
 //var server = '.168.43.19242:80';
-var server = '192.168.43.42';
+var server = '192.168.43.42:8000/api/v1';
 
 /*------------CEK STATUS LOGED/TIDAK-----------*/
 var ses_loged 		= sessionStorage.getItem('loged');
@@ -150,13 +150,28 @@ $(document).on("pageshow", "#pagelogin", function(){
 	}
 });
 
+$(document).on("pageshow", "#pagehome", function(){	
+	// $.ajax({
+ //        method: 'get',
+ //        url: 'http://'+server+'/apilelang/select-dashboard.php',
+ //        dataType: 'json',
+ //        success: function(data){
+ //        	var data = data;
+ //        	$('#dashprop').text(data[0].properti);
+ //        	$('#dashpes').text(data[0].peserta);
+ //        	$('#dashtx').text(data[0].transaksi);
+ //        },
+ //        error: pesanGagal
+ //    });
+});
+
+
 
 $(document).on("pageshow", "#pagebarang", function(){
-	$('#smallModal2').css("display", "none");
 	// TAMPIL DATA
 	$.ajax({
         method: 'get',
-        url: 'http://'+server+'/apilelang/selectall.php',
+        url: 'http://'+server+'/properti/list',
         dataType: 'json',
         success: tampilSukses,
         error: pesanGagal
@@ -169,7 +184,7 @@ $(document).on("pageshow", "#pagebarang", function(){
 
 			// TAMPIL DATA PER BARANG
 			for (var i = 0; i < barang.length; i++) {
-				$("#konten-brg").append('<div class="col-md-12"> <div class="card"> <div class="header"> <h2> '+barang[i].nama+' <small><span class="badge bg-green">Rp. '+pisahKoma(barang[i].harga)+',-</span></small> </h2> </div> <div class="body"> <div id="aniimated-thumbnials" class="list-unstyled row clearfix"> <div class="col-md-12"> <a href="#pagedetailbrg" class="a-detail" data-sub-html="Description" param="'+barang[i].id+'"> <img class="img-responsive thumbnail" src="http://'+server+'/apilelang/'+barang[i].photo_path+'"> </a> </div> </div> <h5>Tanggal Lelang : <br/><br/> <span class="badge bg-red text-center">'+barang[i].tanggal_mulai.substr(0,10)+' s/d '+barang[i].tanggal_akhir.substr(0,10)+'</span></h5> <div> <p>'+barang[i].deskripsi.substr(0,100)+'...'+'</p> <div class="row"> <div class="col-xs-6"> <button type="button" class="btn btn-block btn-lg bg-deep-orange waves-effect btn-pilih" data-toggle="modal" data-target="#smallModal2" param="'+barang[i].id+'"><i class="material-icons">done</i> Pilih</button> </div> <div class="col-xs-6"> <a href="#pagedetailbrg" id="btndetailbrg" class="btn btn-block btn-lg bg-blue waves-effect a-detail" param="'+barang[i].id+'"><i class="material-icons">&#xe8ef;</i> Detail</a> </div> </div> </div> </div> </div> </div>');
+				$("#konten-brg").append('<div class="col-md-12"> <div class="card"> <div class="header"> <h2> '+barang[i].nama+' <small><span class="badge bg-green">Rp. '+pisahKoma(barang[i].harga)+',-</span></small> </h2> </div> <div class="body"> <div id="aniimated-thumbnials" class="list-unstyled row clearfix"> <div class="col-md-12"> <a href="#pagedetailbrg" class="a-detail" data-sub-html="Description" param="'+barang[i].id+'"> <img class="img-responsive thumbnail align-center" src='+barang[i].photo_medium+'> </a> </div> </div> <h5>Tanggal Lelang : <br/><br/> <span class="badge bg-red text-center">'+barang[i].tanggal_mulai.substr(0,10)+' s/d '+barang[i].tanggal_akhir.substr(0,10)+'</span></h5> <div> <p>'+barang[i].deskripsi.substr(0,500)+' ....'+'</p> <div class="row"> <div class="col-xs-6"> <a href="#pagebid" class="btn btn-block btn-lg bg-deep-orange waves-effect btn-pilih" param="'+barang[i].id+'"><i class="material-icons">done</i> Pilih</a> </div> <div class="col-xs-6"> <a href="#pagedetailbrg" id="btndetailbrg" class="btn btn-block btn-lg bg-blue waves-effect btn-pilih" param="'+barang[i].id+'"><i class="material-icons">&#xe8ef;</i> Detail</a> </div> </div> </div> </div> </div> </div>');
 			}
 		//}
 	}
@@ -180,58 +195,30 @@ function pesanGagal(){
 }
 
 function pisahKoma(angka){
-	return angka.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+	return angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
-$("#konten-brg").on('click', 'button.btn-pilih', function(event){
-	$('#smallModalLabel2').empty();
+var selected = "";
+
+$("#konten-brg").on('click', 'a.btn-pilih', function(event){
+	$('#namaprop').empty();
 	$('.inpbid').val('');
-	$('.inpbid').focus();
 	$('.btnbid').attr('param', '');
-	var param = '&id='+$(this).attr('param');
+	// var param = '&id='+$(this).attr('param');
+	var param = $(this).attr('param');
+	selected = param;
 	$.ajax({
-        method: 'post',
-        url: 'http://'+server+'/apilelang/tampil.php',
-        data: param,
+        // method: 'post',
+        method: 'get',
+        // url: 'http://'+server+'/apilelang/tampil.php',
+        url: 'http://'+server+'/properti/detail/'+param,
+        // data: param,
         dataType: 'json',
         success: tampilDataSukses,
         error: pesanGagal
 	});
 	function tampilDataSukses(data){
 	    //alert('mulai tampil data!');
-	    var barang = data;
-
-	    tglplus1 = addDays(barang[0].tanggal_akhir, 1);
-	    //alert(tglplus1);
-	    var counttgl = tglplus1.substr(0,10).replace(/\-/g,'/');
-		$('#clock2').countdown(counttgl, function(event) {
-		  var $this = $(this).html(event.strftime('<span class="label-waktu label-danger">%dh %Hj %Mm %Sd</span>'));
-		});
-		$('#smallModalLabel2').append(barang[0].nama);
-		$('.btnbid').attr('param', barang[0].id);
-
-	}
-});
-
-
-$("#konten-brg").on('click', 'a.a-detail', function(event){
-    $('#smallModalLabel').empty();
-	$('.btnbid').attr('param', '');
-    var param = '&id='+$(this).attr('param');
-    //$('#btfrsimpan').attr('param',$(this).attr('param')); 
-    //alert(param);
-    $.ajax({
-        method: 'post',
-        url: 'http://'+server+'/apilelang/tampil.php',
-        data: param,
-        dataType: 'json',
-        success: tampilDataSukses,
-        error: pesanGagal
-	});
-
-	function tampilDataSukses(data){
-	    //alert('mulai tampil data!');
-	    var barang = data;
 	    $('#tdnama').empty();
 	    $('#tdtglmulai').empty();
 	    $('#tdtglselesai').empty();
@@ -239,23 +226,30 @@ $("#konten-brg").on('click', 'a.a-detail', function(event){
 	    $('#tdhrgmin').empty();
 	    $('#tddeskripsi').empty();
 
-	    $('#imgdetail1').attr("src", "http://"+server+"/apilelang/"+barang[0].photo_path);
-	    $('#tdnama').append(barang[0].nama);
-	    $('#tdtglmulai').append(barang[0].tanggal_mulai.substr(0,10));
-	    $('#tdtglselesai').append(barang[0].tanggal_akhir.substr(0,10));
-	    $('#tdkategori').append(barang[0].nama_kategori);
-	    $('#tdhrgmin').append(pisahKoma(barang[0].harga));
-	    $('#tddeskripsi').append(barang[0].deskripsi);
-	    tglplus1 = addDays(barang[0].tanggal_akhir, 1);
+	    // $('#imgdetail1').attr("src", "http://"+server+"/apilelang/"+barang[0].photo_path);
+	    $('#imgdetail1').attr("src", data.photo_medium);
+	    $('#tdnama').append(data.nama);
+	    $('#tdtglmulai').append(data.tanggal_mulai.substr(0,10));
+	    $('#tdtglselesai').append(data.tanggal_akhir.substr(0,10));
+	    $('#tdkategori').append(data.kategori_id);
+	    $('#tdhrgmin').append(pisahKoma(data.harga));
+	    $('#tddeskripsi').append(data.deskripsi);
+
+	    tglplus1 = addDays(data.tanggal_akhir, 1);
 	    //alert(tglplus1);
 	    var counttgl = tglplus1.substr(0,10).replace(/\-/g,'/');
-		$('#clock').countdown(counttgl, function(event) {
-		  var $this = $(this).html(event.strftime('<span class="label-waktu label-danger">%dh %Hj %Mm %Sd</span>'));
+		$('#clock2').countdown(counttgl, function(event) {
+			if (event.strftime('%d') == '00' && event.strftime('%H') == '00' && event.strftime('%M') == '00' && event.strftime('%S') == '00') {
+				$(".btnbid").addClass('disabled');
+				var $this = $(this).html('<span class="label-waktu label-danger">lelang telah selesai</span>');	
+			} else {
+		  		var $this = $(this).html(event.strftime('<span class="label-waktu label-danger">%dh %Hj %Mm %Sd</span>'));
+				$(".btnbid").removeClass('disabled');
+			}
 		});
-		$('#smallModalLabel').append(barang[0].nama);
-		$('.btnbid').attr('param', barang[0].id);
+		$('#namaprop').append(data.nama);
+		$('.btnbid').attr('param', selected);
 	}
-
 });
 
 function addDays(date, days) {
@@ -264,14 +258,6 @@ function addDays(date, days) {
     var tgl = result.getFullYear()+'/'+(result.getMonth()+1)+'/'+result.getDate();
     return tgl;
 }
-
-$(document).on("pagehide", '#pagedetailbrg', function(){
-	$('#smallModal').css("display", "none");
-	$('#smallModal').removeClass("in");
-
-	$('div').removeClass('modal-backdrop');
-	$('body').removeClass("modal-open");
-});
 
 // ACTION MENU
 	$('.menu-home').click(function(){
@@ -296,6 +282,9 @@ $(document).on("pagehide", '#pagedetailbrg', function(){
 		window.location = "#pageabout";
 	});
 	$('.menu-logout').click(logout);
+	$('#btnhome').click(function(){
+		window.location = "#pagehome";
+	});
    
 // END ACTION MENU
 
@@ -304,10 +293,10 @@ $('#btnpgprofilok').click(function(){
 	if (uniquekey == '') {
 		alert("Unique Key Tidak Boleh Kosong!");
 	} else{
-		var param = "&key="+uniquekey;
+		var param = "&uniqueKey="+uniquekey;
 		$.ajax({
 			method: 'post',
-			url: 'http://'+server+'/apilelang/getprofil.php',
+			url: 'http://'+server+'/peserta/uniquekey',
 			data: param,
 			dataType: 'json',
 			success: suksesGetProfil,
@@ -326,12 +315,12 @@ $('#btnpgprofilok').click(function(){
 		$('#detnohp').empty();
 		$('#detjaminan').empty();
 
-		$('#detnama').append(profil[0].nama);
-		$('#detnik').append(profil[0].nik);
-		$('#detnorek').append(profil[0].nomor_rekening);
-		$('#detalamat').append(profil[0].alamat);
-		$('#detnohp').append(profil[0].nomor_telepon);
-		$('#detjaminan').append(profil[0].nominal);
+		$('#detnama').append(profil.nama);
+		$('#detnik').append(profil.nik);
+		$('#detnorek').append(profil.nomor_rekening);
+		$('#detalamat').append(profil.alamat);
+		$('#detnohp').append(profil.nomor_telepon);
+		$('#detjaminan').append(profil.nominal);
 	}
 });
 
@@ -341,7 +330,7 @@ $('#inploguniq').on('keyup',enableLogin);
 function enableLogin(){
     var inploguniq = $('#inploguniq').val(); 
     if(inploguniq == ''){
-        $('#btnlogin').attr('disabled','true');   
+        $('#btnlogin').attr('disabled','true');
     }
     else {
         $('#btnlogin').removeAttr('disabled','false');  
@@ -355,39 +344,46 @@ $('#btnlogin').click(function() {
 	if (inpunique == '') {
 		alert('Unique Key Tidak Boleh Kosong!');
 	} else {
-		var data = "key="+inpunique;
+		var data = 'uniqueKey='+inpunique;
 		$.ajax({
 			method : 'post',
 			data : data,
 			dataType : 'json' ,
-			url : 'http://'+server+'/apilelang/login.php',
+			url : 'http://'+server+'/peserta/uniquekey',
 			success: function(data){
 		        var biodata = data;
-		        // console.log(biodata.data);
-		        if(biodata.status=="sukses")
-		          {
+		        console.log(biodata.data);
+		        if(biodata.status != 'error'){
 		          	var loged = 1;
 		            $('#inploguniq').val("");
 		            $('#btUnique').attr('disabled','true');
-		            insertLog(biodata.data,loged);
-		          } else {
+		            insertLog(biodata,loged);
+		            
+		        } else {
 		            $('#inploguniq').val("");
 		            alert("Anda Belum Terdaftar");
+		            alert(biodata.message);
 		            $('#btUnique').attr('disabled','true');  
-		          }
 		        }
+		    },
+		    error : function(e){
+		    	if (e.status == 400) {
+		    		alert('Key tidak ditemukan atau telah expired.');
+		            $('#inploguniq').val("");
+		    	}
+		    }
 		});
 	}
 	
 	function insertLog(data,log){
-        $id_unique_key  = data.id_unique_key; 
+        $id_unique_key  = data.id; 
         $peserta_id     = data.peserta_id;
 		$key     		= data.key;
         $status     	= data.status;
         $expired_date   = data.expired_date;
-        $date_log     	= data.loged.date_log;
+        $date_log     	= Date();
                 
-        $id_peserta		= data.peserta.id_peserta;
+        $id_peserta		= data.peserta.id;
         $nama			= data.peserta.nama;
         $nomor_rekening	= data.peserta.nomor_rekening;
         $nomor_telepon	= data.peserta.nomor_telepon;
@@ -395,7 +391,7 @@ $('#btnlogin').click(function() {
         $alamat			= data.peserta.alamat;
         $email			= data.peserta.email;
         
-        $id_jaminan		= data.jaminan.id_jaminan;
+        $id_jaminan		= data.jaminan.id;
         $nominal		= data.jaminan.nominal;
         $unique_key_id	= data.jaminan.unique_key_id;
       
@@ -466,7 +462,7 @@ function logout(){
 $(document).on("pageshow", "#pagejadwal", function(){
 	$.ajax({
 		method : 'get',
-		url : 'http://'+server+'/apilelang/selectall.php',
+		url : 'http://'+server+'/properti/list',
 		dataType : 'json',
 		success : suksesGetJadwal,
 		error : pesanGagal
@@ -482,61 +478,47 @@ $(document).on("pageshow", "#pagejadwal", function(){
 	}
 });
 
-$('.btn-pilih').click(function(){
-	$('.inpbid').val('');
-});
-
 // INPUT QUERY
 $('.btnbid').click(function(){
 	var jmlbid = $('.inpbid').val().replace(/\./g,"");
-	var jmlbid2 = $('.inpbid2').val().replace(/\./g,"");
 	var id_unique_key = sessionStorage.getItem('id_unique_key');
 	var id_prop = $('.btnbid').attr('param');
-	var id_prop2 = $('.btnbid').attr('param2');
 	var logged = sessionStorage.getItem('loged');
 	$('.inpbid').val('');
-	$('.inpbid2').val('');
 
-	if (jmlbid == '' && jmlbid2 == '') {
+	if (jmlbid == '') {
 		alert('Jumlah Penawaran Tidak Boleh Kosong!');
 	} else {
 		if (logged == '1') {
-			//alert('Langsung Query!');
-			//alert(logged);
-			// alert('properti_id : '+id_prop);
-			// alert('unique_key_id : '+id_unique_key);
-			// alert('penawaran : '+jmlbid);
-			if (jmlbid2 == '') {
-				var data = "&prop_id="+id_prop+"&key_id="+id_unique_key+"&penawaran="+jmlbid;
-			} else {
-				var data = "&prop_id="+id_prop2+"&key_id="+id_unique_key+"&penawaran="+jmlbid2;
+			var data = {
+				properti_id : id_prop,
+				unique_key_id : id_unique_key,
+				penawaran : jmlbid
 			}
-			$.ajax({
+			alert(data);
+
+			$.ajax({			
 			method : 'post',
 			data : data,
 			dataType : 'json' ,
-			url : 'http://'+server+'/apilelang/inserttx.php',
+			url : 'http://'+server+'/transaksi/store',
 			success: function(data){
-		        var tx = data;
-		        // console.log(biodata.data);
-		        if(tx.status == 1)
-		          {
-		          	alert(tx.msg);
-		          	$('#smallModal2').css("display", "none");
-					$('#smallModal2').removeClass("in");
-
-					$('div').removeClass('modal-backdrop');
-					$('body').removeClass("modal-open");
-		          	window.location = "#pagehome";
-		          } else {
-		          	alert(tx.msg);	
-		          }
-		        }
+				if (data.status != 'error') {
+			        alert(data.message);
+			        window.location = '#pagehome';
+				} else {
+					alert('Aduhh error. '+data.message);
+					window.location = '#pagebarang';
+				}
+		    },
+		    error: function(e){
+		    	var er = e;
+		    	alert('Maaf, transaksi Gagal.');
+		    }
 		});
 		} else {
+			alert('Maaf, Anda harus login lebih dulu.');
 			window.location = '#pagelogin';
-			$('body').removeClass("modal-open");
-			$('div').removeClass('modal-backdrop');
 		}
 	}
 });
